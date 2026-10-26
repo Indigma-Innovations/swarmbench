@@ -1,6 +1,6 @@
 # SwarmBench
 
-[![PyPI](https://img.shields.io/pypi/v/swarmbench?label=PyPI)](https://pypi.org/project/swarmbench/)
+[![PyPI](https://img.shields.io/pypi/v/swarmbench?label=PyPI&cacheSeconds=3600)](https://pypi.org/project/swarmbench/)
 [![Python](https://img.shields.io/badge/python-3.12%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![Tests](https://img.shields.io/github/actions/workflow/status/Indigma-Innovations/swarmbench/tests.yml?branch=main&label=tests)](https://github.com/Indigma-Innovations/swarmbench/actions/workflows/tests.yml)
 [![Docs](https://img.shields.io/readthedocs/swarmbench?label=docs)](https://swarmbench.readthedocs.io)
