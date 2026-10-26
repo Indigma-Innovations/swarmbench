@@ -1,0 +1,121 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "swarmbench"
+dynamic = ["version"]
+description = "A benchmark for strategic edge nodes in battery-coupled proportional-share (Kelly) markets"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [
+  { name = "Vasilis Perifanis", email = "info@indigma.eu" },
+  { name = "Nikolaos Pavlidis" },
+]
+keywords = [
+  "benchmark",
+  "multi-agent",
+  "game-theory",
+  "auctions",
+  "kelly-mechanism",
+  "edge-computing",
+  "resource-allocation",
+  "reinforcement-learning",
+  "stochastic-games",
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Education",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Scientific/Engineering :: Mathematics",
+  "Topic :: System :: Distributed Computing",
+  "Typing :: Typed",
+]
+dependencies = ["PyYAML>=6.0"]
+
+[project.optional-dependencies]
+report = ["matplotlib>=3.8"]
+analysis = ["scipy>=1.11"]
+notebooks = ["jupyter>=1.0", "matplotlib>=3.8"]
+docs = ["mkdocs-material>=9.5", "mkdocstrings[python]>=0.26"]
+dev = ["pytest>=8.0", "ruff>=0.6", "build>=1.2"]
+
+[project.urls]
+Homepage = "https://github.com/Indigma-Innovations/swarmbench"
+Documentation = "https://swarmbench.readthedocs.io"
+Source = "https://github.com/Indigma-Innovations/swarmbench"
+Issues = "https://github.com/Indigma-Innovations/swarmbench/issues"
+Changelog = "https://swarmbench.readthedocs.io/en/latest/changelog/"
+
+[project.scripts]
+swarmbench = "swarmbench.cli:main"
+
+[tool.hatch.version]
+path = "src/swarmbench/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/swarmbench"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/swarmbench",
+  "tests",
+  "docs",
+  "mkdocs.yml",
+  "README.md",
+  "LICENSE",
+  "NOTICE",
+  "CHANGELOG.md",
+  "CITATION.cff",
+  "CONTRIBUTING.md",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+filterwarnings = [
+  # Python 3.12+ warns when forking after a library (e.g. OpenBLAS via SciPy) started threads;
+  # the workers only run pure-Python episodes.
+  "ignore:This process .* is multi-threaded, use of fork:DeprecationWarning",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+src = ["src", "tests"]
+# The trained CatBoost model is a generated export.
+extend-exclude = ["src/swarmbench/strategies/catboost_value_model.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "C4", "SIM", "RUF"]
+ignore = [
+  "B027",    # Agent.reset is an optional hook, empty on purpose
+  "B905",    # zip() strictness is not needed for these fixed-length tuples
+  "C420",    # {k: 0.0 for k in RESOURCES} reads as the bid it builds
+  "E741",    # short maths names (I for one family, l for a bound) read better here
+  "RUF001",  # the reports use typographic characters on purpose
+  "RUF002",
+  "RUF003",
+  "SIM108",  # ternaries are not always clearer
+  "UP006",   # keep the arena's typing.Dict/List annotations as shipped
+  "UP035",
+]
+
+[tool.ruff.lint.isort]
+force-sort-within-sections = true
+known-first-party = ["swarmbench"]
+
+[tool.ruff.lint.per-file-ignores]
+# The strategies and the arena engine are kept as they were measured: only
+# real errors are checked there, so a style fix can never change a bid.
+"src/swarmbench/strategies/*" = ["E", "W", "I", "B", "UP", "C4", "SIM", "RUF"]
+"src/swarmbench/arena/*" = ["E", "W", "I", "B", "UP", "C4", "SIM", "RUF"]
+"src/swarmbench/bots.py" = ["UP"]

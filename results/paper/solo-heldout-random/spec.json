@@ -1,0 +1,18 @@
+{
+ "mode": "solo",
+ "agents": [
+  "random"
+ ],
+ "seed_start": 70001,
+ "seeds": 100,
+ "scenario": "graded",
+ "rounds": 60,
+ "workers": 4,
+ "python": "3.13.16",
+ "opponents": [
+  "energy-hoarder",
+  "contrarian",
+  "random"
+ ],
+ "name": "solo-heldout-random"
+}

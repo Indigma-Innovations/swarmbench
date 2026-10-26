@@ -1,0 +1,74 @@
+name: publish
+
+# Builds the sdist and wheel and uploads them to PyPI with trusted publishing
+# (OpenID Connect; no API token is stored in the repository). Runs when a
+# release tag vX.Y.Z is pushed. Configure the trusted publisher on PyPI first:
+# repository Indigma-Innovations/swarmbench, workflow publish.yml, environment pypi.
+
+on:
+  push:
+    tags: ["v*.*.*"]
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: "Target index: pypi or testpypi"
+        required: true
+        default: testpypi
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - name: Check that the tag matches the package version
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          version=$(grep -Po '^__version__ = "\K[^"]+' src/swarmbench/__init__.py)
+          test "v$version" = "${GITHUB_REF_NAME}" || { echo "tag ${GITHUB_REF_NAME} != v$version"; exit 1; }
+      - run: uv build
+      - name: Smoke-test the wheel
+        run: |
+          uv venv /tmp/wheel-env
+          uv pip install --python /tmp/wheel-env dist/*.whl
+          /tmp/wheel-env/bin/swarmbench --list
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  testpypi:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.repository == 'testpypi'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/swarmbench
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: astral-sh/setup-uv@v6
+      - run: uv publish --publish-url https://test.pypi.org/legacy/ --trusted-publishing always
+
+  pypi:
+    if: startsWith(github.ref, 'refs/tags/v') || github.event.inputs.repository == 'pypi'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/swarmbench
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: astral-sh/setup-uv@v6
+      - run: uv publish --trusted-publishing always

@@ -1,0 +1,26 @@
+{
+ "clairvoyant": {
+  "key": "clairvoyant",
+  "name": "Oracle (reference)",
+  "family": "Reference",
+  "order": 0.4,
+  "realistic": false,
+  "bot": false,
+  "episodes": 100,
+  "mean_score": 19.194335000000002,
+  "ci95": 0.26246687679395153,
+  "mean_rank": 1.0,
+  "first": 100,
+  "beat_all": 100,
+  "idle": 11.51,
+  "floors": 0.38,
+  "missed": 0,
+  "exceptions": 0,
+  "ms_mean": 189.97750877479893,
+  "ms_max": 608.163266,
+  "lsw": -197.52168475,
+  "welfare": 56.570382,
+  "others_score": 37.376047,
+  "score_rank": 1
+ }
+}

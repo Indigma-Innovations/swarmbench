@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use SwarmBench, please cite it as below."
+title: "SwarmBench"
+type: software
+authors:
+  - family-names: Perifanis
+    given-names: Vasilis
+    affiliation: "Indigma Innovations; Democritus University of Thrace"
+    email: info@indigma.eu
+  - family-names: Pavlidis
+    given-names: Nikolaos
+    affiliation: "Indigma Innovations; Democritus University of Thrace"
+version: 1.0.0
+date-released: 2026-10-26
+license: Apache-2.0
+repository-code: "https://github.com/Indigma-Innovations/swarmbench"
+url: "https://swarmbench.readthedocs.io"
+keywords:
+  - benchmark
+  - multi-agent systems
+  - game theory
+  - Kelly mechanism
+  - edge computing
+  - resource allocation
+  - stochastic games
+abstract: >-
+  SwarmBench is a Python benchmark for strategic edge nodes in a repeated,
+  budgeted proportional-share auction among edge nodes with
+  CES utilities, service floors and battery dynamics. It provides a catalog of
+  36 agents from fixed rules to planners and learned policies, three benchmark
+  modes, reference points and stored results that can be re-run and checked score by score.
+preferred-citation:
+  type: article
+  title: "SwarmBench: A Benchmark for Strategic Edge Nodes in Battery-Coupled Proportional-Share Markets"
+  authors:
+    - family-names: Perifanis
+      given-names: Vasilis
+    - family-names: Pavlidis
+      given-names: Nikolaos
+  year: 2026
+  notes: "Manuscript submitted for publication"

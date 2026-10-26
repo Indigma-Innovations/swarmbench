@@ -1,0 +1,26 @@
+{
+ "random": {
+  "key": "random",
+  "name": "Random split (reference)",
+  "family": "Reference",
+  "order": 0.5,
+  "realistic": true,
+  "bot": false,
+  "episodes": 100,
+  "mean_score": 10.230503,
+  "ci95": 0.14604934920195917,
+  "mean_rank": 2.98,
+  "first": 0,
+  "beat_all": 0,
+  "idle": 16.54,
+  "floors": 15.67,
+  "missed": 0,
+  "exceptions": 0,
+  "ms_mean": 0.0032145579843534285,
+  "ms_max": 0.216967,
+  "lsw": -233.623878,
+  "welfare": 51.120624,
+  "others_score": 40.890121,
+  "score_rank": 1
+ }
+}

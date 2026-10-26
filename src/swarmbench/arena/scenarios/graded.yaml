@@ -1,0 +1,47 @@
+# Graded scenario: the run the VelesHack 2026 submissions were scored on, and
+# the scenario every SwarmBench experiment uses.
+#
+# 60 rounds. In the live HTTP arena the rounds were 4 s long and the arena
+# injected 503s, 429s and latency (chaos_rate, latency_ms); SwarmBench runs the
+# engine in-process, so those two keys have no effect on its results.
+#
+# The seed below is a placeholder: SwarmBench sets the seed of every episode.
+
+name: graded
+
+# --- round cadence ---------------------------------------------------------
+round_seconds: 4.0
+total_rounds: 60
+lease_seconds: 12.0
+
+# --- economy ---------------------------------------------------------------
+base_budget: 1.0
+budget_jitter: 0.25
+capacity_base: 1.0
+capacity_jitter: 0.30
+
+# --- device physics --------------------------------------------------------
+# Charge burned per unit of ENERGY SHARE won (before the mobility surcharge).
+# Winning energy is not free: it comes out of your own battery.
+battery_drain: 0.30
+idle_drain: 0.004
+battery_cutoff: 0.05
+recharge_rate: 0.22
+
+# --- admission gate --------------------------------------------------------
+kappa_bar: 0.60
+kappa_penalty: 0.05
+
+# --- hostility -------------------------------------------------------------
+chaos_rate: 0.08
+latency_ms: 250
+
+# --- determinism -----------------------------------------------------------
+seed: 20261006
+
+# --- field -----------------------------------------------------------------
+baselines: [naive-max, even-split, proportional]
+
+# --- lifecycle -------------------------------------------------------------
+autostart: true
+start_delay_seconds: 10.0

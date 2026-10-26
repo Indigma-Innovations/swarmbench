@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "model": "CatBoost Monte Carlo remaining-score value",
+  "catboost_version": "1.2.10",
+  "numpy_version": "2.5.3",
+  "feature_count": 43,
+  "episodes": 100,
+  "examples": 5900,
+  "training_seed_range": [
+    4001,
+    4080
+  ],
+  "validation_seed_range": [
+    4081,
+    4100
+  ],
+  "refit_seed_range": [
+    4001,
+    4100
+  ],
+  "data_sha256": "d9b32cb7d6c05171b1eb3fd0678290b7249d9bed57dabe59edbd73fbdf2cfe38",
+  "candidates": [
+    {
+      "depth": 3,
+      "l2_leaf_reg": 3.0,
+      "trees": 350,
+      "validation_rmse": 0.6792585318654493
+    },
+    {
+      "depth": 3,
+      "l2_leaf_reg": 10.0,
+      "trees": 330,
+      "validation_rmse": 0.6991347625303369
+    },
+    {
+      "depth": 4,
+      "l2_leaf_reg": 3.0,
+      "trees": 323,
+      "validation_rmse": 0.6564854269676742
+    },
+    {
+      "depth": 4,
+      "l2_leaf_reg": 10.0,
+      "trees": 344,
+      "validation_rmse": 0.6720165140329712
+    },
+    {
+      "depth": 6,
+      "l2_leaf_reg": 3.0,
+      "trees": 295,
+      "validation_rmse": 0.6311415221487651
+    },
+    {
+      "depth": 6,
+      "l2_leaf_reg": 10.0,
+      "trees": 265,
+      "validation_rmse": 0.6285575801098752
+    }
+  ],
+  "selected_params": {
+    "iterations": 265,
+    "learning_rate": 0.03,
+    "loss_function": "RMSE",
+    "eval_metric": "RMSE",
+    "random_seed": 137,
+    "thread_count": 2,
+    "task_type": "CPU",
+    "grow_policy": "SymmetricTree",
+    "boosting_type": "Plain",
+    "allow_writing_files": false,
+    "verbose": false,
+    "depth": 6,
+    "l2_leaf_reg": 10.0
+  },
+  "validation_metrics": {
+    "all": {
+      "states": 1180,
+      "ridge_rmse": 0.7525336370432057,
+      "catboost_rmse": 0.6285575801098752
+    },
+    "battery_at_most_0.10": {
+      "states": 282,
+      "ridge_rmse": 0.6701042186588517,
+      "catboost_rmse": 0.5646362651256474
+    },
+    "at_most_10_rounds_left": {
+      "states": 200,
+      "ridge_rmse": 0.253051059642737,
+      "catboost_rmse": 0.28567382328672125
+    },
+    "energy_weight_at_least_0.33": {
+      "states": 177,
+      "ridge_rmse": 0.8931710624756921,
+      "catboost_rmse": 0.6322347453289439
+    }
+  },
+  "clipped_validation_rmse": {
+    "ridge": 0.7525336370432057,
+    "catboost": 0.6285575801098752
+  },
+  "refit_training_rmse": 0.4991670749156648,
+  "export_parity_max_abs_error": 4.99518648666708e-10,
+  "export_border_probe_count": 919,
+  "export_border_parity_max_abs_error": 4.995133195961898e-10,
+  "export_sha256": "987aa2e98b765c055c260b878eb0e26e3f1ad7d788487b11e56f8ed50b3732fb",
+  "training_python": "3.13.9 (main, Nov 19 2025, 22:41:40) [MSC v.1944 64 bit (AMD64)]"
+}
